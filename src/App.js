@@ -82,6 +82,12 @@ class Game extends React.Component {
     });
   }
 
+  isActiveHistoryButton(i) {
+    if ( i === this.state.stepNumber ) {
+      return "active-btn"
+    }
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -90,7 +96,7 @@ class Game extends React.Component {
     const moves = history.map((step, move) => {
       const contentLI = move
         ? <div>
-          <button onClick={() => this.jumpTo(move)}>Go to move # {move}</button>
+          <button onClick={() => this.jumpTo(move)} className={this.isActiveHistoryButton(move)}>Go to move # {move}</button>
           <span>x: {step.xCoordinate} y: {step.yCoordinate}</span>
         </div>
         :
