@@ -53,7 +53,14 @@ class Game extends React.Component {
       }],
       xIsNext: true,
       stepNumber: 0,
+      sortReverse: false
     }
+  }
+
+  toggleSortMode() {
+    this.setState({
+      sortReverse: !this.state.sortReverse,
+    })
   }
 
   jumpTo(step) {
@@ -111,6 +118,10 @@ class Game extends React.Component {
       )
     });
 
+    if (this.state.sortReverse) {
+      moves.reverse()
+    }
+
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
@@ -126,7 +137,8 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <span>{status}</span>
+          <button onClick={() => this.toggleSortMode()}>Change sort mode</button>
           <ol>{moves}</ol>
         </div>
       </div>
